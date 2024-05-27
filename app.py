@@ -56,7 +56,7 @@ if option == 'Destinos voluntariados':
     
     # Crear un DataFrame con los destinos y sus coordenadas
     data = {
-        'destinos': ['<a href=https://fr.wikipedia.org/wiki/Place_Guillaume_II target=_blank>Place Guillaume II</a>', 'Ecuador', 'Panamá', 'Australia', 'Cambodia', 'Fiji', 'Ghana', 'Grecia', 'Hawai', 'Marruecos', 'Perú', 'República Dominicana', 'Tailandia', 'Tanzania', 'Vietnam'],
+        'destinos': ['<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Costa Rica</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Ecuador</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Panama</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Australia</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Camboya</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Fiji</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Ghana</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Grecia</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Hawai</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Marruecos</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Perú</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Republica Dominicana</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Tailandia</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Tanzania</a>', '<a href=https://beyondeducation.es/hacer-voluntariado-espana/ target=_blank>Vietnam</a>'],
         'latitud': [9.7489, -1.8312, 8.5380, -25.2744, 12.5657, -17.7134, 7.9465, 39.0742, 19.8968, 31.7917, -9.1899, 18.7357, 15.8700, -6.3690, 14.0583],
         'longitud': [-83.7534, -78.1834, -80.7821, 133.7751, 104.9910, 178.0650, -1.0232, 21.8243, -155.5828, -7.0926, -75.0152, -70.1627, 100.9925, 34.8888, 108.2772]
     }
@@ -65,8 +65,8 @@ if option == 'Destinos voluntariados':
     # Crear el mapa con folium.Marker
     mymap = folium.Map(location=[0, 0], zoom_start=2)
     for _, row in df_destinos.iterrows():
-        tooltip = "Click me!"
-        folium.Marker([row['latitud'], row['longitud']], popup=row['destinos'],tooltip=tooltip).add_to(mymap)
+        
+        folium.Marker([row['latitud'], row['longitud']], popup=row['destinos']).add_to(mymap)
 
     # Mostrar el mapa en Streamlit
     folium_static(mymap)
@@ -92,7 +92,6 @@ elif option == 'Destinos campamentos':
     mymap_campamentos = folium.Map(location=[0, 0], zoom_start=2)
     for _, row in df_campamentos.iterrows():
         folium.Marker([row['latitud'], row['longitud']], popup=row['destinos']).add_to(mymap_campamentos)
-        folium.TileLayer('Stamen Terrain').add_to(mymap_campamentos)
 
 
     # Mostrar el mapa en Streamlit
