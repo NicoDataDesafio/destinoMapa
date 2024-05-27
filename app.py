@@ -52,13 +52,6 @@ option = st.sidebar.selectbox('Navigation', ['Home',
 # Si selecciona 'Destinos voluntariados', mostrar el mapa de folium.Marker
 if option == 'Destinos voluntariados':
 
-    tooltip = "Click me!"
-
-    marker = folium.Marker(
-        [49.61068, 6.13127],
-        popup="<a href=https://fr.wikipedia.org/wiki/Place_Guillaume_II>Place Guillaume II</a>",
-        tooltip=tooltip
-    )
 
     
     # Crear un DataFrame con los destinos y sus coordenadas
@@ -99,6 +92,8 @@ elif option == 'Destinos campamentos':
     mymap_campamentos = folium.Map(location=[0, 0], zoom_start=2)
     for _, row in df_campamentos.iterrows():
         folium.Marker([row['latitud'], row['longitud']], popup=row['destinos']).add_to(mymap_campamentos)
+        folium.TileLayer('Stamen Terrain').add_to(mymap_campamentos)
+
 
     # Mostrar el mapa en Streamlit
     folium_static(mymap_campamentos)
