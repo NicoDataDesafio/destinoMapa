@@ -4,6 +4,7 @@ import pandas as pd
 import folium
 import plotly.express as px
 from streamlit_folium import folium_static
+from streamlit_option_menu import option_menu
 
 import os
 
@@ -38,19 +39,23 @@ def sql_query(query):
     return df
 
 # Página de inicio
-st.set_page_config(page_title="Inside", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
+st.set_page_config(page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
 st.markdown('# Inside Beyond Education', unsafe_allow_html=True)
 
 # Menú lateral
-option = st.sidebar.selectbox('Navigation', ['Home', 
-                                             'Destinos de interés',
-                                             'Destinos voluntariados', 
-                                             'Destinos campamentos'])
-
+# Menú superior
+selected = option_menu(
+    menu_title="Elije Mapa",  # Dejar el título del menú vacío
+    options=['Destinos voluntariados', 'Destinos campamentos'],  # Opciones del menú
+    icons=['map', 'map'],  # Iconos de cada opción
+    menu_icon="cast",  # Icono del menú
+    default_index=0,  # Índice de la opción por defecto
+    orientation="horizontal",  # Orientación del menú
+)
 
 
 # Si selecciona 'Destinos voluntariados', mostrar el mapa de folium.Marker
-if option == 'Destinos voluntariados':
+if selected == 'Destinos voluntariados':
 
 
     
@@ -72,14 +77,14 @@ if option == 'Destinos voluntariados':
     folium_static(mymap)
 
 # Si selecciona 'Destinos campamentos', mostrar el mapa con los destinos de campamentos
-elif option == 'Destinos campamentos':
+elif selected == 'Destinos campamentos':
 
 
     # Crear un DataFrame con los destinos de campamentos y sus coordenadas
     data_campamentos = {
-        'destinos': ['West Sussex', 'Crawley', 'Northampton', 'Buckinghamshire', 'Dorset', 'London', 'Manchester', 
-                     'Biarritz', 'French Alps', 'Switzerland', 'Swiss Alps', 'Maine', 'New Hampshire', 'Pennsylvania', 
-                     'Florida', 'Santander', 'Barcelona', 'Madrid', 'León', 'Berlin', 'Canada', 'Dublin'],
+        'destinos': ['<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>West Sussex</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Crawley</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Northampton</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Buckinghamshire</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Dorset</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>London</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Manchester</a>', 
+                     '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Biarritz</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>French Alps</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Switzerland</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Swiss Alps</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Maine</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>New Hampshire</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Pennsylvania</a>', 
+                     '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Florida</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Santander</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Barcelona</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Madrid</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>León</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Berlin</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Canada</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Dublin</a>'],
         'latitud': [50.8091, 51.1092, 52.2405, 51.9943, 50.7151, 51.5074, 53.4808, 43.4832, 45.8325, 46.8182, 46.8182, 45.2538, 
                     43.1939, 40.7128, 27.9944, 43.4623, 41.3851, 40.4168, 42.5987, 52.5200, 53.3498, 53.3498],
         'longitud': [-0.7539, -0.1872, -0.9027, -0.7394, -2.4406, -0.1278, -2.2426, -1.5586, 6.6113, 8.2275, 8.2275, -69.4455, 
