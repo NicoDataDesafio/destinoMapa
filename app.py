@@ -40,7 +40,6 @@ def sql_query(query):
 
 # Página de inicio
 st.set_page_config(page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
-st.markdown('# Inside Beyond Education', unsafe_allow_html=True)
 
 # Menú lateral
 # Menú superior
@@ -55,7 +54,7 @@ selected = option_menu(
 
 
 # Si selecciona 'Destinos voluntariados', mostrar el mapa de folium.Marker
-if selected == 'Destinos voluntariados':
+if selected == 'Voluntariados':
 
 
     
@@ -77,7 +76,7 @@ if selected == 'Destinos voluntariados':
     folium_static(mymap)
 
 # Si selecciona 'Destinos campamentos', mostrar el mapa con los destinos de campamentos
-elif selected == 'Destinos campamentos':
+elif selected == 'Campamentos':
 
 
     # Crear un DataFrame con los destinos de campamentos y sus coordenadas
