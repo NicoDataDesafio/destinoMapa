@@ -45,8 +45,8 @@ st.markdown('# Inside Beyond Education', unsafe_allow_html=True)
 # Menú lateral
 # Menú superior
 selected = option_menu(
-    menu_title="Elije Mapa",  # Dejar el título del menú vacío
-    options=['Destinos voluntariados', 'Destinos campamentos'],  # Opciones del menú
+    menu_title=None,  # Dejar el título del menú vacío
+    options=['Voluntariados', 'Campamentos'],  # Opciones del menú
     icons=['map', 'map'],  # Iconos de cada opción
     menu_icon="cast",  # Icono del menú
     default_index=0,  # Índice de la opción por defecto
