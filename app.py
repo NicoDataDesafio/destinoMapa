@@ -114,4 +114,4 @@ elif selected == 'Campamentos':
 
 
     # Mostrar el mapa en Streamlit
-    folium_static(mymap_campamentos)
+    folium_static(mymap_campamentos,width=1500, height=800)
