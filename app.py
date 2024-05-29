@@ -12,7 +12,15 @@ st.get_option("theme.primaryColor")
 st.get_option("theme.secondaryBackgroundColor")
 st.get_option("server.enableCORS")
 st.get_option("server.enableXsrfProtection")
-
+st.markdown("""
+        <style>
+        iframe {
+            width: 100%;
+            min-height: 400px;
+            height: 100%:
+        }
+        </style>
+        """, unsafe_allow_html=True)
 # Menú lateral
 # Menú superior
 selected = option_menu(
@@ -27,15 +35,6 @@ selected = option_menu(
 
 # Si selecciona 'Destinos voluntariados', mostrar el mapa de folium.Marker
 if selected == 'Voluntariados':
-    st.markdown("""
-        <style>
-        iframe {
-            width: 100%;
-            min-height: 400px;
-            height: 100%:
-        }
-        </style>
-        """, unsafe_allow_html=True)
 
 
     
@@ -73,15 +72,7 @@ if selected == 'Voluntariados':
 
 # Si selecciona 'Destinos campamentos', mostrar el mapa con los destinos de campamentos
 elif selected == 'Campamentos':
-    st.markdown("""
-        <style>
-        iframe {
-            width: 100%;
-            min-height: 400px;
-            height: 100%:
-        }
-        </style>
-        """, unsafe_allow_html=True)
+    
 
 
     # Crear un DataFrame con los destinos de campamentos y sus coordenadas
