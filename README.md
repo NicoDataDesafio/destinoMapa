@@ -26,7 +26,7 @@ La aplicación tiene dos principales funcionalidades:
 
     ```bash
     git clone https://github.com/NicoDataDesafio/destinoMapa.git
-    cd tu_repositorio
+    cd destinoMapa
     ```
 
 2. Crea y activa un entorno virtual:
