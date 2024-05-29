@@ -16,8 +16,6 @@ st.markdown("""
         <style>
         iframe {
             width: 100%;
-            min-height: 400px;
-            height: 100%:
         }
         </style>
         """, unsafe_allow_html=True)
