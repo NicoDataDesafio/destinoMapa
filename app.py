@@ -1,15 +1,17 @@
 import streamlit as st
-import psycopg2
 import pandas as pd
 import folium
-import plotly.express as px
 from streamlit_folium import folium_static
 from streamlit_option_menu import option_menu
 
 
 # Página de inicio
-st.set_page_config(page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
+st.set_page_config(layout="wide", page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
 
+st.get_option("theme.primaryColor")
+st.get_option("theme.secondaryBackgroundColor")
+st.get_option("server.enableCORS")
+st.get_option("server.enableXsrfProtection")
 # Menú lateral
 # Menú superior
 selected = option_menu(
