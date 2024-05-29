@@ -88,7 +88,7 @@ if selected == 'Voluntariados':
         folium.Marker([row['latitud'], row['longitud']], popup=row['destinos']).add_to(mymap)
 
     # Mostrar el mapa en Streamlit
-    folium_static(mymap,width=800, height=400)
+    folium_static(mymap)
 
 # Si selecciona 'Destinos campamentos', mostrar el mapa con los destinos de campamentos
 elif selected == 'Campamentos':
@@ -114,4 +114,4 @@ elif selected == 'Campamentos':
 
 
     # Mostrar el mapa en Streamlit
-    folium_static(mymap_campamentos,width=800, height=400)
+    folium_static(mymap_campamentos)
