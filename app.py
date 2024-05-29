@@ -6,37 +6,6 @@ import plotly.express as px
 from streamlit_folium import folium_static
 from streamlit_option_menu import option_menu
 
-import os
-
-my_database = os.environ.get('my_database')
-my_host = os.environ.get('my_host')
-my_password = os.environ.get('my_password')
-my_port = os.environ.get('my_port')
-my_user = os.environ.get('my_user')
-
-# Configura las variables de conexión
-HOST = my_host
-DATABASE = my_database
-USER = my_user
-PASSWORD = my_password
-PORT = my_port  # Asegúrate de que este valor sea un entero
-
-# Configura la conexión a la base de datos
-def get_db_connection():
-    return psycopg2.connect(
-        host=HOST,
-        database=DATABASE,
-        user=USER,
-        password=PASSWORD,
-        port=PORT
-    )
-
-# Función para ejecutar consultas SQL y devolver un DataFrame de Pandas
-def sql_query(query):
-    conn = get_db_connection()
-    df = pd.read_sql(query, conn)
-    conn.close()
-    return df
 
 # Página de inicio
 st.set_page_config(page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
