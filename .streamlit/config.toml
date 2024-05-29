@@ -1,5 +1,9 @@
 [theme]
+
 base = "light"
 primaryColor = "#a50085"
-secondaryBackgroundColor = "#e0e0e2"
-textColor = "#282a31"
+
+[server]
+
+enableCORS = false
+enableXsrfProtection = false

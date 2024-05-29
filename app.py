@@ -1,45 +1,17 @@
 import streamlit as st
-import psycopg2
 import pandas as pd
 import folium
-import plotly.express as px
 from streamlit_folium import folium_static
 from streamlit_option_menu import option_menu
 
-import os
-
-my_database = os.environ.get('my_database')
-my_host = os.environ.get('my_host')
-my_password = os.environ.get('my_password')
-my_port = os.environ.get('my_port')
-my_user = os.environ.get('my_user')
-
-# Configura las variables de conexión
-HOST = my_host
-DATABASE = my_database
-USER = my_user
-PASSWORD = my_password
-PORT = my_port  # Asegúrate de que este valor sea un entero
-
-# Configura la conexión a la base de datos
-def get_db_connection():
-    return psycopg2.connect(
-        host=HOST,
-        database=DATABASE,
-        user=USER,
-        password=PASSWORD,
-        port=PORT
-    )
-
-# Función para ejecutar consultas SQL y devolver un DataFrame de Pandas
-def sql_query(query):
-    conn = get_db_connection()
-    df = pd.read_sql(query, conn)
-    conn.close()
-    return df
 
 # Página de inicio
-st.set_page_config(page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
+st.set_page_config(layout="wide", page_title="Destinos", page_icon="img/cropped-Beyond-Education_Horizonatal-color.png")
+
+st.get_option("theme.primaryColor")
+st.get_option("theme.secondaryBackgroundColor")
+st.get_option("server.enableCORS")
+st.get_option("server.enableXsrfProtection")
 
 # Menú lateral
 # Menú superior
@@ -88,7 +60,7 @@ if selected == 'Voluntariados':
         folium.Marker([row['latitud'], row['longitud']], popup=row['destinos']).add_to(mymap)
 
     # Mostrar el mapa en Streamlit
-    folium_static(mymap)
+    folium_static(mymap,width=1500)
 
 # Si selecciona 'Destinos campamentos', mostrar el mapa con los destinos de campamentos
 elif selected == 'Campamentos':
@@ -96,9 +68,28 @@ elif selected == 'Campamentos':
 
     # Crear un DataFrame con los destinos de campamentos y sus coordenadas
     data_campamentos = {
-        'destinos': ['<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>West Sussex</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Crawley</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Northampton</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Buckinghamshire</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Dorset</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>London</a>', '<a https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Manchester</a>', 
-                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Francia2024_compressed.pdf target=_blank>Biarritz</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Francia2024_compressed.pdf target=_blank>French Alps</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Suiza2024_compressed.pdf target=_blank>Switzerland</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Suiza2024_compressed.pdf target=_blank>Swiss Alps</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Maine</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>New Hampshire</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Pennsylvania</a>', 
-                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Florida</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Santander</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Barcelona</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Madrid</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>León</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Alemania2024-comprimido.pdf target=_blank>Berlin</a>', '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Canada2024-comprimido.pdf target=_blank>Canada</a>', '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Dublin</a>'],
+        'destinos': ['<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>West Sussex</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Crawley</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Northampton</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Buckinghamshire</a>', 
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Dorset</a>', 
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>London</a>', 
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_ReinoUnido2024_compressed.pdf target=_blank>Manchester</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Francia2024_compressed.pdf target=_blank>Biarritz</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Francia2024_compressed.pdf target=_blank>French Alps</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Suiza2024_compressed.pdf target=_blank>Switzerland</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Suiza2024_compressed.pdf target=_blank>Swiss Alps</a>', 
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Maine</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>New Hampshire</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Pennsylvania</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_EstadosUnidos2024_compressed.pdf target=_blank>Florida</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Santander</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Barcelona</a>', 
+                     '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>Madrid</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Espana2024_compressed.pdf target=_blank>León</a>',
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Alemania2024-comprimido.pdf target=_blank>Berlin</a>', 
+                    '<a href=https://beyondeducation.es/wp-content/uploads/2024/02/Catalogo_Campamentos_Canada2024-comprimido.pdf target=_blank>Canada</a>',
+                    '<a href=https://beyondeducation.es/campamentos-verano/ target=_blank>Dublin</a>'],
         'latitud': [50.8091, 51.1092, 52.2405, 51.9943, 50.7151, 51.5074, 53.4808, 43.4832, 45.8325, 46.8182, 46.8182, 45.2538, 
                     43.1939, 40.7128, 27.9944, 43.4623, 41.3851, 40.4168, 42.5987, 52.5200, 53.3498, 53.3498],
         'longitud': [-0.7539, -0.1872, -0.9027, -0.7394, -2.4406, -0.1278, -2.2426, -1.5586, 6.6113, 8.2275, 8.2275, -69.4455, 
@@ -114,4 +105,4 @@ elif selected == 'Campamentos':
 
 
     # Mostrar el mapa en Streamlit
-    folium_static(mymap_campamentos)
+    folium_static(mymap_campamentos,width=1500)
